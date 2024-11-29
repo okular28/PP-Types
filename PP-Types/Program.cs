@@ -1,6 +1,9 @@
 ﻿// Write required code.
 
 // Data - do not change it in code!
+using System.Diagnostics.Metrics;
+using System.Xml.Linq;
+
 string[] names = {
     "Mickey Mouse", "Minnie Mouse", "Donald Duck", "Goofy", "Pluto", "Daisy Duck", "Simba", "Nala", 
     "Timon", "Pumbaa", "Mufasa", "Ariel", "Flounder", "Sebastian", "Ursula", "Belle", "Beast", "Gaston", 
@@ -14,7 +17,23 @@ string[] names = {
 // After last element should be ".".
 void PrintGroups(string[] t, int perLine)
 {
-
+    int counter = 0;
+    foreach (string elements in t)
+    {
+        Console.Write(elements);
+        counter++;
+        if (elements == t.Last()){
+            Console.Write(".");
+        }
+        else if (counter == perLine)
+        {
+            counter = 0;
+            Console.Write(",\n");
+        } else Console.Write(", ");
+    }
+    //Console.WriteLine(Array.IndexOf(t, elements)+ " " + perLine + " " +Array.IndexOf(t, elements) / perLine);
+   
+    //}
     // Write required code.
 
 }
@@ -27,9 +46,24 @@ void PrintGroups(string[] t, int perLine)
 
 void PrintColumns(string[] t, int perLine, int width)
 {
+    for (int i = 0; i < t.Length; i++)
+    {
+        string element = t[i];
+        if (element.Length > width)
+            element = element.Substring(0, width);
 
-    // Write required code.
+        Console.Write(element.PadRight(width));
 
+        if ((i + 1) % perLine == 0)
+        {
+            Console.WriteLine();
+        }
+        else if (i < t.Length - 1)
+        {
+            Console.Write("| ");
+        }
+    }
+    Console.WriteLine();
 }
 
 
@@ -106,7 +140,7 @@ Aurora         | Maleficent     | Rapunzel       | Flynn Rider    | Elsa
 Anna           | Olaf           | Moana          | Maui           | Hercules
 */
 
-Console.WriteLine("\n\nPrintColumns(names, 7, 10):\n");
+Console.WriteLine("\n\nPrintColumns(names, 8, 10):\n");
 PrintColumns(names, 8, 10);
 /*
 Mickey Mou| Minnie Mou| Donald Duc| Goofy     | Pluto     | Daisy Duck| Simba     | Nala
